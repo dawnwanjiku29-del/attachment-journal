@@ -150,7 +150,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .page-head .lede { margin: 0; opacity: .9; font-size: 1.1rem; }
 main .wrap > .btn { align-self: flex-start; }
 .tiles { padding-block: 40px 8px; }
-.wrap-wide { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.wrap-wide { width: 100%; max-width: 960px; margin: 0 auto; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
 .tile { display: flex; flex-direction: column; gap: 6px; text-decoration: none; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; min-width: 0; }
 .tile:hover { border-color: var(--accent); }
 .tile-k { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
@@ -195,6 +195,12 @@ section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
   section.photo-quote blockquote { flex: 1 1 0; min-width: 0; font-size: 1.7rem; }
   section.photo-quote .ph { flex: none; align-self: center; margin-right: 0; }
 }
+[hidden] { display: none !important; }
+.page-head .wrap, footer.foot .wrap { max-width: 960px; }
+.thanks .ask { font-weight: 600; color: var(--fg); }
+.can-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.can-list li { padding: 12px 16px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); line-height: 1.45; }
+.can-list strong { font-family: var(--font-display); }
 </style>
 
 <nav class="nav band" aria-label="Page menu">
@@ -253,18 +259,18 @@ section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
     <section>
       <h2>What I learned</h2>
       <ul class="lessons">
-        <li><strong>What an AI agent is</strong><span>A model that has been given a set of instructions and tools to execute it.</span></li>
-        <li><strong>Progressive disclosure</strong><span>Knowing only what is necessary.</span></li>
+        <li><strong>What an AI agent is</strong><span>A model that has been given a set of instructions and tools to carry them out.</span></li>
+        <li><strong>Progressive disclosure</strong><span>Knowing only what is necessary, when it is needed.</span></li>
         <li><strong>Prompts</strong><span>What a prompt is.</span></li>
         <li><strong>Skills</strong><span>What skills are.</span></li>
         <li><strong>Using Claude</strong><span>How to use Claude and its features.</span></li>
         <li><strong>Using AI safely</strong><span>How to use AI safely in my work.</span></li>
-        <li><strong>The context window</strong><span>Giving it the right context.</span></li>
+        <li><strong>The right context</strong><span>Giving it the right context so it gives the right output.</span></li>
       </ul>
     </section>
 
     <section>
-      <p>I have attended events that helped me see what is beyond the future, and how I can use AI safely in my work. I have also really enjoyed my time with Sam, Peter and Billy. Beyond being co-workers, they have been really good friends to me. Thank you for everything you have included me in, done for me and taught me. It means a lot.</p>
+      <p>I have attended events that helped me see what is behind the future, and how I can use AI safely in my work. I have also really enjoyed my time with Sam, Peter and Billy. Beyond being co-workers, they have been really good friends to me. Thank you for everything you have included me in, done for me and taught me. It means a lot.</p>
     </section>
 
     <blockquote>I don't regret choosing this place.</blockquote>
@@ -320,9 +326,14 @@ section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
     <figure class="ph r" style="--w:320px;--rot:2.4deg"><img src="glovo.jpg" alt="A speaker on stage at the Glovo Future of Commerce Summit in front of a large screen" width="675" height="900" loading="lazy"><figcaption>Future of Commerce Summit</figcaption></figure>
 
     <section class="with-photo photo-r">
-      <h2>Mistakes, doubts and growth</h2>
-      <p>As my attachment comes to an end, I know I have made a lot of mistakes. Every time Sam warns me, I wonder whether I am good enough. Am I allowed to make mistakes? Am I trying too hard to be perfect? Am I the right person for this position? I have learned, and gone back to my notes, and still I do not always feel good enough.</p>
-      <p>I also do not know whether I will be retained at Fluent after this attachment, because of my mistakes, or because I may not be a huge help to them. All I can say is that I tried to become a better version of myself, and I am leaving with a different mindset from the one I came with.</p>
+      <h2>Mistakes and growth</h2>
+      <p>As my attachment comes to an end, I know I have made mistakes. Every time Sam warned me, I went back to my notes and learned from it. I came wondering whether I was allowed to make mistakes, and I am leaving knowing that mistakes are part of growing.</p>
+      <p>That growth shows in what I can do now. I tried to become a better version of myself, and I am leaving with a different mindset from the one I came with.</p>
+      <ul class="can-list">
+        <li><strong>I am fluent in AI.</strong> I know what AI is, and what agents, prompts and skills are.</li>
+        <li><strong>I can use Claude.</strong> I know its features, how to give it the right context, and how to use it safely.</li>
+        <li><strong>I am capable of building websites.</strong> I can take an idea and turn it into a working page.</li>
+      </ul>
       <figure class="ph" style="--w:270px;--rot:-1.6deg"><img src="red-venue.jpg" alt="A red-lit event hall with a large screen reading Claude Community Kenya" width="548" height="900" loading="lazy"><figcaption>Claude Community Kenya</figcaption></figure>
     </section>
 
@@ -387,7 +398,10 @@ section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
         <li><img src="peter.jpg" alt="Peter Kibet in a grey suit and blue tie" width="360" height="360"><span class="nm">Peter Kibet</span><span class="role">Claude Community Ambassador, Kenya</span></li>
         <li><img src="billy.jpg" alt="Billy Mwangi in a dark suit and blue tie" width="360" height="360"><span class="nm">Billy Mwangi</span><span class="role">Claude Community Ambassador, Kenya</span></li>
       </ul>
+      <p class="ask">If there is room for me to stay, I would really appreciate being retained. I would love to keep learning and growing with you.</p>
     </section>
+
+    <blockquote>I came to attend, and I am leaving with the skills, the confidence and the people I never expected to find.</blockquote>
 
     <a class="btn" href="#join">Next: join the community</a>
   </div>
