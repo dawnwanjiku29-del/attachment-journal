@@ -1,0 +1,612 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Dawn at Hackhouse Africa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* Layout: one calm reading column, a bold green hero band, a pull quote, a thank-you card for the three mentors, a closing call to join the community. */
+:root {
+  --bg: #f3f6f4;
+  --surface: #ffffff;
+  --fg: #14211d;
+  --muted: #4f625c;
+  --line: #d3ddd8;
+  --brand: #0f4a3c;
+  --brand-fg: #f3f6f4;
+  --accent: #e9a216;
+  --accent-fg: #1a1405;
+  --font-display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --font-body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1714; --surface: #14231e; --fg: #e8efec; --muted: #9db1aa; --line: #26382f;
+    --brand: #0a3329; --brand-fg: #e8efec; --accent: #f0b232; --accent-fg: #1a1405;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1714; --surface: #14231e; --fg: #e8efec; --muted: #9db1aa; --line: #26382f;
+  --brand: #0a3329; --brand-fg: #e8efec; --accent: #f0b232; --accent-fg: #1a1405;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 18px; line-height: 1.65;
+}
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.12; margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.band { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 720px; margin: 0 auto; min-width: 0; }
+
+.hero { background: var(--brand); color: var(--brand-fg); padding-block: 64px 56px; }
+.hero { position: relative; overflow: hidden; isolation: isolate; }
+.hero .wrap { display: flex; flex-direction: column; gap: 20px; position: relative; z-index: 1; }
+.bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.bg canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.kicker { font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0; }
+.hero h1 { font-size: clamp(2.3rem, 7vw, 3.8rem); font-weight: 700; letter-spacing: -.02em; }
+.hero p.lede { margin: 0; font-size: 1.15rem; max-width: 56ch; opacity: .92; }
+.byline { font-size: 15px; opacity: .8; margin: 0; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.btn {
+  display: inline-block; text-decoration: none; font-weight: 600; font-size: 16px;
+  padding: 13px 22px; border-radius: 10px; background: var(--accent); color: var(--accent-fg);
+}
+.btn.ghost { background: transparent; color: var(--brand-fg); border: 2px solid currentColor; padding: 11px 20px; }
+.btn:hover { filter: brightness(1.06); }
+
+main { padding-block: 56px 24px; }
+main .wrap { display: flex; flex-direction: column; gap: 44px; max-width: 960px; }
+section { display: flex; flex-direction: column; gap: 14px; }
+section h2 { font-size: 1.7rem; font-weight: 700; color: var(--brand); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) section h2 { color: var(--accent); } }
+:root[data-theme="dark"] section h2 { color: var(--accent); }
+section p { margin: 0; max-width: 65ch; }
+
+blockquote {
+  margin: 0; padding: 8px 0 8px 22px; border-left: 4px solid var(--accent);
+  font-family: var(--font-display); font-size: 1.45rem; line-height: 1.3; font-weight: 500; max-width: 30ch;
+}
+
+.thanks { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 16px; }
+.thanks h2 { color: var(--fg); }
+.names { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.names li { background: var(--bg); border-radius: 0; padding: 10px 10px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.names img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; object-position: 50% 22%; border-radius: 0; display: block; margin-bottom: 8px; }
+.names .nm { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; line-height: 1.2; }
+.names .role { font-size: 14px; color: var(--muted); line-height: 1.3; }
+
+.join { background: var(--brand); color: var(--brand-fg); padding-block: 48px; margin-top: 40px; }
+.join .wrap { display: flex; flex-direction: column; gap: 16px; }
+.join h2 { font-size: 1.8rem; }
+.join p { margin: 0; max-width: 52ch; opacity: .92; }
+footer.foot { position: relative; overflow: hidden; isolation: isolate; background: var(--brand); color: var(--brand-fg); padding-block: 64px; font-size: 15px; border-top: 1px solid rgba(243, 246, 244, .15); }
+footer.foot .wrap { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 6px; }
+footer.foot strong { font-family: var(--font-display); font-size: 1.2rem; }
+footer.foot span { opacity: .85; }
+@media (prefers-reduced-motion: no-preference) { .btn { transition: filter .15s; } }
+
+.ph { margin: 0; width: var(--w, 300px); max-width: 100%; background: var(--surface); border: 1px solid var(--line); padding: 8px 8px 12px; box-shadow: 0 10px 28px rgba(0, 0, 0, .16); transform: rotate(var(--rot, 0deg)); align-self: center; }
+.ph img { display: block; width: 100%; height: auto; }
+.ph figcaption { font-size: 14px; color: var(--muted); padding-top: 10px; line-height: 1.3; }
+.ph.r { align-self: flex-end; }
+.ph.l { align-self: flex-start; }
+@media (min-width: 800px) {
+  section.with-photo { display: grid; column-gap: 44px; row-gap: 14px; align-items: start; grid-template-columns: minmax(0, 1fr) auto; }
+  section.with-photo > :not(figure) { grid-column: 1; }
+  section.with-photo > figure { grid-column: 2; grid-row: 1 / span 6; margin-top: 6px; }
+  section.with-photo.photo-l { grid-template-columns: auto minmax(0, 1fr); }
+  section.with-photo.photo-l > :not(figure) { grid-column: 2; }
+  section.with-photo.photo-l > figure { grid-column: 1; }
+}
+
+/* top menu */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 31; background: var(--brand); }
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--brand); color: var(--brand-fg); border-bottom: 1px solid rgba(243, 246, 244, .14); }
+.nav-in { max-width: 960px; margin: 0 auto; min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.nav-brand { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; text-decoration: none; letter-spacing: -.01em; }
+.nav-links { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.nav-links a { text-decoration: none; font-size: 15px; font-weight: 600; padding: 8px 10px; border-radius: 8px; opacity: .88; }
+.nav-links a:hover { opacity: 1; background: rgba(243, 246, 244, .12); }
+.share-btn { font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; border: 0; border-radius: 8px; padding: 8px 14px; margin-left: 6px; background: var(--accent); color: var(--accent-fg); }
+.share-btn:hover { filter: brightness(1.06); }
+.share-panel { position: absolute; top: calc(100% + 8px); right: max(16px, env(safe-area-inset-right, 0px)); width: min(360px, calc(100% - 32px)); background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 12px; padding: 16px; box-shadow: 0 16px 40px rgba(0, 0, 0, .28); display: flex; flex-direction: column; gap: 10px; }
+.share-panel p { margin: 0; font-weight: 600; font-size: 16px; }
+.share-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.share-row input { flex: 1 1 160px; min-width: 0; font: inherit; font-size: 14px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); }
+.share-row button, .share-row a { font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; border: 0; border-radius: 8px; padding: 9px 14px; background: var(--brand); color: var(--brand-fg); }
+.share-row a.wa { background: var(--accent); color: var(--accent-fg); flex: 1 1 100%; }
+.share-status { font-size: 14px; color: var(--muted); min-height: 1.3em; }
+@media (max-width: 520px) { .nav-brand { display: none; } .nav-links { margin-left: 0; width: 100%; justify-content: space-between; } }
+[id] { scroll-margin-top: 76px; }
+
+/* photo viewer */
+.ph img { cursor: zoom-in; }
+.lb { position: fixed; inset: 0; z-index: 100; background: rgba(6, 12, 10, .92); display: flex; align-items: center; justify-content: center; padding: calc(56px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.lb figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 100%; min-width: 0; }
+.lb img { display: block; max-width: 100%; max-height: calc(100vh - 170px); width: auto; height: auto; object-fit: contain; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); }
+.lb figcaption { color: #e8efec; font-size: 15px; text-align: center; }
+.lb button { position: absolute; font: inherit; cursor: pointer; border: 0; color: #e8efec; background: rgba(243, 246, 244, .14); border-radius: 999px; width: 46px; height: 46px; font-size: 24px; line-height: 1; display: flex; align-items: center; justify-content: center; }
+.lb button:hover { background: rgba(243, 246, 244, .26); }
+.lb .lb-close { top: calc(10px + env(safe-area-inset-top, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); }
+.lb .lb-prev { left: max(10px, env(safe-area-inset-left, 0px)); top: 50%; margin-top: -23px; }
+.lb .lb-next { right: max(10px, env(safe-area-inset-right, 0px)); top: 50%; margin-top: -23px; }
+
+/* fade in on scroll */
+.pre { opacity: 0; translate: 0 18px; }
+@media (prefers-reduced-motion: no-preference) { main .wrap > *, .tile, .shot { transition: opacity .8s ease, translate .8s ease; } }
+
+/* pages */
+.view { min-height: 62vh; }
+.nav-home { display: none; }
+.nav-links a[aria-current="page"] { opacity: 1; background: rgba(243, 246, 244, .16); }
+@media (max-width: 520px) { .nav-home { display: inline-block; } .nav-links a { padding: 8px 7px; font-size: 14px; } .share-btn { padding: 8px 11px; font-size: 14px; margin-left: 2px; } }
+.page-head { background: var(--brand); color: var(--brand-fg); padding-block: 48px 40px; }
+.page-head .wrap { display: flex; flex-direction: column; gap: 12px; }
+.page-head h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; letter-spacing: -.02em; }
+.page-head .lede { margin: 0; opacity: .9; font-size: 1.1rem; }
+main .wrap > .btn { align-self: flex-start; }
+.tiles { padding-block: 40px 8px; }
+.wrap-wide { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.tile { display: flex; flex-direction: column; gap: 6px; text-decoration: none; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; min-width: 0; }
+.tile:hover { border-color: var(--accent); }
+.tile-k { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+.tile strong { font-family: var(--font-display); font-size: 1.25rem; line-height: 1.2; }
+.tile span:last-child { color: var(--muted); font-size: 16px; line-height: 1.45; }
+
+/* photos page */
+.gallery { column-count: 3; column-gap: 16px; }
+.shot { margin: 0 0 16px; break-inside: avoid; background: var(--surface); border: 1px solid var(--line); padding: 6px 6px 10px; }
+.shot img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+.shot figcaption { font-size: 14px; color: var(--muted); padding: 8px 4px 0; line-height: 1.3; }
+@media (max-width: 800px) { .gallery { column-count: 2; } }
+@media (max-width: 480px) { .gallery { column-count: 1; } }
+@media (max-width: 560px) {
+  .nav-links { width: auto; flex: 1 1 auto; min-width: 0; margin-left: 0; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { white-space: nowrap; }
+  .share-btn { flex: none; }
+}
+
+/* video cover */
+.hero .wrap.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; max-width: 960px; align-items: center; }
+.hero-text { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.cover { margin: 0; justify-self: center; width: min(100%, 340px); }
+.cover-frame { position: relative; aspect-ratio: 478 / 850; border-radius: 18px; overflow: hidden; background: #0b1512; border: 1px solid rgba(243, 246, 244, .25); box-shadow: 0 24px 60px rgba(0, 0, 0, .4); }
+.cover-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.cover { display: flex; flex-direction: column; gap: 12px; }
+.sound-btn { align-self: center; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; border: 0; border-radius: 999px; padding: 10px 16px; background: var(--accent); color: var(--accent-fg); }
+.sound-btn:hover { filter: brightness(1.06); }
+@media (min-width: 820px) { .hero .wrap.hero-grid { grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; } .cover { justify-self: end; } }
+.lessons { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.lessons li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.lessons strong { font-family: var(--font-display); font-size: 1.1rem; line-height: 1.2; }
+.lessons span { color: var(--muted); font-size: 16px; line-height: 1.45; }
+</style>
+
+<nav class="nav band" aria-label="Page menu">
+  <div class="nav-in">
+    <a class="nav-brand" href="#home">Dawn Wanjiku</a>
+    <div class="nav-links">
+      <a class="nav-home" href="#home">Home</a>
+      <a href="#story">Story</a>
+      <a href="#photos">Photos</a>
+      <a href="#mentors">Mentors</a>
+      <a href="#join">Join</a>
+    </div>
+    <button type="button" class="share-btn" id="shareBtn" aria-expanded="false" aria-controls="sharePanel">Share</button>
+  </div>
+  <div class="share-panel" id="sharePanel" hidden>
+    <p>Share this page</p>
+    <div class="share-row">
+      <input id="shareUrl" type="text" readonly aria-label="Page link">
+      <button type="button" id="copyBtn">Copy link</button>
+      <a class="wa" id="waLink" href="https://wa.me/" target="_blank" rel="noopener">Share on WhatsApp</a>
+    </div>
+    <span class="share-status" id="shareStatus" role="status" aria-live="polite"></span>
+  </div>
+</nav>
+
+<div class="view" id="view-home">
+<header class="hero band">
+  <div class="bg" aria-hidden="true"><canvas id="particles"></canvas></div>
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+    <p class="kicker">Attachment story · Hackhouse Africa</p>
+    <h1>I thought attachment would just go by. It didn't.</h1>
+    <p class="lede">Three months at Fluent, alongside Claude Community Kenya, taught me more about people, growth and myself than I expected.</p>
+    <p class="byline">By Dawn Wanjiku · Diploma in ICT, Daystar University</p>
+    <div class="actions">
+      <a class="btn" href="#story">Read my story</a>
+    </div>
+    </div>
+    <figure class="cover">
+      <div class="cover-frame">
+        <video id="coverVideo" src="intro-final.mp4" poster="intro-final-poster.jpg" width="478" height="850" muted loop playsinline autoplay preload="metadata" aria-label="Dawn introducing herself"></video>
+      </div>
+        <button type="button" class="sound-btn" id="soundBtn" aria-pressed="false">Tap for sound</button>
+    </figure>
+  </div>
+</header>
+
+<main class="band">
+  <div class="wrap">
+    <section>
+      <h2>In my own words</h2>
+      <p>My name is Dawn Wanjiku. I have been at Hackhouse for about two and a half to three months now. What I have learned since I came has been very broad, and it has expanded how I think about things. What I have been trained in is AI.</p>
+      <p>I work with Fluent at Hackhouse, alongside Claude Community Kenya. Billy, Peter and Sam have taught me a lot.</p>
+    </section>
+
+    <section>
+      <h2>What I learned</h2>
+      <ul class="lessons">
+        <li><strong>What an AI agent is</strong><span>A model that has been given a set of instructions and tools to carry them out.</span></li>
+        <li><strong>Progressive disclosure</strong><span>Knowing only what is necessary, when it is needed.</span></li>
+        <li><strong>Prompts</strong><span>What a prompt is.</span></li>
+        <li><strong>Skills</strong><span>What skills are.</span></li>
+        <li><strong>Using Claude</strong><span>How to use Claude and its features.</span></li>
+        <li><strong>Using AI safely</strong><span>How to use AI safely in my work.</span></li>
+        <li><strong>The right context</strong><span>Giving it the right context so it gives the right output.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <p>I have attended events that helped me see what is behind the future, and how I can use AI safely in my work. I have also really enjoyed my time with Sam, Peter and Billy. Beyond being co-workers, they have been really good friends to me. Thank you for everything you have included me in, done for me and taught me. It means a lot.</p>
+    </section>
+
+    <blockquote>I don't regret choosing this place.</blockquote>
+  </div>
+</main>
+
+<section class="band tiles">
+  <div class="wrap-wide">
+    <a class="tile" href="#story"><span class="tile-k">Story</span><strong>What attachment taught me</strong><span>Three months at Hackhouse Africa, in my own words.</span></a>
+    <a class="tile" href="#photos"><span class="tile-k">Photos</span><strong>What I got to experience</strong><span>The events I got to attend.</span></a>
+    <a class="tile" href="#mentors"><span class="tile-k">Mentors</span><strong>The people behind it</strong><span>Sam, Peter and Billy, and what they gave me.</span></a>
+    <a class="tile" href="#join"><span class="tile-k">Join</span><strong>Claude Community Kenya</strong><span>Come and see what is happening out here.</span></a>
+  </div>
+</section>
+</div>
+
+<div class="view" id="view-story" hidden>
+<header class="page-head band">
+  <div class="wrap">
+    <p class="kicker">My story</p>
+    <h1>Three months at Hackhouse Africa</h1>
+      <p class="lede">Told in my own words.</p>
+  </div>
+</header>
+<main class="band">
+  <div class="wrap">
+    <section class="with-photo photo-r">
+      <h2>What I expected</h2>
+      <p>I am a student at Daystar University pursuing a Diploma in ICT, and I am currently doing my attachment at Hackhouse Africa, a company that is more of a community. When I first joined, I thought it would be something ordinary: go in, do some work, watch TikTok, run a few errands, and let three months fly by, the way people describe attachment.</p>
+      <p>Little did I know it would be one of the best decisions I ever made.</p>
+      <figure class="ph" style="--w:270px;--rot:2.2deg"><img src="office.jpg" alt="People seated at white desks in a bright, open workspace with a wooden floor" width="567" height="812" loading="lazy"><figcaption>A community session</figcaption></figure>
+    </section>
+
+    <section class="with-photo photo-l">
+      <h2>Meeting the people</h2>
+      <p>I am based at Fluent, alongside Claude Community Kenya. Sam was the first person I met there. He asked if I knew what they were doing, and honestly, I had never researched it until then. It did not sound like something big until I realised how amazing it could be. I came back the next day and met Billy, then Peter.</p>
+      <p>I have never met people so eager to teach me until I understand, to include me in their activities so my scope grows, and to make me feel loved like the second family I never had. They accept me and introduce me to places I never thought I would reach.</p>
+      <figure class="ph" style="--w:270px;--rot:-2.4deg"><img src="helping.jpg" alt="One person leaning over to help another with a laptop in a busy workspace" width="568" height="900" loading="lazy"><figcaption>Learning side by side</figcaption></figure>
+    </section>
+
+    <blockquote>Someone asked me if I knew what a privilege and an opportunity it is to be part of these people.</blockquote>
+
+    <figure class="ph r" style="--w:330px;--rot:-2deg"><img src="karura-collage.jpg" alt="Touch Grass at Karura collage: caves, a fallen tree, the stream and the waterfall" width="724" height="900" loading="lazy"><figcaption>Into the caves, and we made it</figcaption></figure>
+
+    <section class="with-photo photo-l">
+      <h2>Learning at my own pace</h2>
+      <p>I was scared of making others uncomfortable, and of growing into this place or forgetting myself along the way. Instead, it has made me a better person. I thought about that question day after day, night after night, and I came to see how blessed I am to be here.</p>
+      <p>I take time to process things. When Billy asked me questions about AI, Sam asked, "Do you want to do this, do you want to know this?" I said yes, I was just thinking and processing. It felt like a lot the first time, and confusing, because I felt I was supposed to already know everything. But everything takes time.</p>
+      <p>What I enjoy most is meeting people at the Claude community events, learning what they do, and finding how we can network and help each other.</p>
+      <figure class="ph" style="--w:250px;--rot:1.8deg"><img src="workshop.jpg" alt="A speaker presenting to a seated audience at an AI training workshop" width="506" height="900" loading="lazy"><figcaption>AI Training Workshop 2026</figcaption></figure>
+    </section>
+
+    <figure class="ph r" style="--w:320px;--rot:2.4deg"><img src="glovo.jpg" alt="A speaker on stage at the Glovo Future of Commerce Summit in front of a large screen" width="675" height="900" loading="lazy"><figcaption>Future of Commerce Summit</figcaption></figure>
+
+    <section class="with-photo photo-r">
+      <h2>Mistakes, doubts and growth</h2>
+      <p>As my attachment comes to an end, I know I have made a lot of mistakes. Every time Sam warns me, I wonder whether I am good enough. Am I allowed to make mistakes? Am I trying too hard to be perfect? Am I the right person for this position? I have learned, and gone back to my notes, and still I do not always feel good enough.</p>
+      <p>I also do not know whether I will be retained at Fluent after this attachment, because of my mistakes, or because I may not be a huge help to them. All I can say is that I tried to become a better version of myself, and I am leaving with a different mindset from the one I came with.</p>
+      <figure class="ph" style="--w:270px;--rot:-1.6deg"><img src="red-venue.jpg" alt="A red-lit event hall with a large screen reading Claude Community Kenya" width="548" height="900" loading="lazy"><figcaption>Claude Community Kenya</figcaption></figure>
+    </section>
+
+    <section class="with-photo photo-l">
+      <h2>A place that makes you want more</h2>
+      <p>There is something about this place that makes you want to work harder and gives you a reason to succeed. Every day you see someone's dream car parked outside, or you see your own dream car and wonder how you will get there. People here are very young and already very successful.</p>
+      <p>I have made good friends here too. They may not know it, but I smile every day when I see them, because I never really had friends to share my smile with.</p>
+      <figure class="ph" style="--w:300px;--rot:2deg"><img src="karura-cover.jpg" alt="Touch Grass cover: a group photo at Karura Forest, 15 November 2026" width="720" height="900" loading="lazy"><figcaption>Touch Grass, Karura Forest</figcaption></figure>
+    </section>
+
+    <figure class="ph l" style="--w:290px;--rot:-2.2deg"><img src="impact-lab.jpg" alt="Two speakers presenting at an Absa training beside a large wall screen" width="551" height="900" loading="lazy"><figcaption>Absa training with Fluent</figcaption></figure>
+
+    <a class="btn" href="#photos">Next: see the photos</a>
+  </div>
+</main>
+</div>
+
+<div class="view" id="view-photos" hidden>
+<header class="page-head band">
+  <div class="wrap">
+    <p class="kicker">Photos</p>
+    <h1>What I got to experience</h1>
+    <p class="lede">The events I got to attend.</p>
+  </div>
+</header>
+<main class="band">
+  <div class="wrap">
+    <div class="gallery">
+      <figure class="shot"><img src="karura-cover.jpg" alt="Touch Grass cover: a group photo at Karura Forest" width="720" height="900" loading="lazy"><figcaption>Touch Grass, Karura Forest · 15 Nov 2026</figcaption></figure>
+      <figure class="shot"><img src="workshop.jpg" alt="A speaker presenting to a seated audience at an AI training workshop" width="506" height="900" loading="lazy"><figcaption>AI Training Workshop 2026</figcaption></figure>
+      <figure class="shot"><img src="glovo.jpg" alt="A speaker on stage at the Glovo Future of Commerce Summit" width="675" height="900" loading="lazy"><figcaption>Future of Commerce Summit</figcaption></figure>
+      <figure class="shot"><img src="impact-lab.jpg" alt="Two speakers at an Absa training beside a large wall screen" width="551" height="900" loading="lazy"><figcaption>Absa training with Fluent</figcaption></figure>
+      <figure class="shot"><img src="red-venue.jpg" alt="A red-lit event hall with a screen reading Claude Community Kenya" width="548" height="900" loading="lazy"><figcaption>Claude Community Kenya</figcaption></figure>
+      <figure class="shot"><img src="karura-collage.jpg" alt="Collage from Karura: the caves, a fallen tree, the stream and the waterfall" width="724" height="900" loading="lazy"><figcaption>Touch Grass at Karura: into the caves, and we made it</figcaption></figure>
+      <figure class="shot"><img src="office.jpg" alt="People seated at white desks in a bright open workspace" width="567" height="812" loading="lazy"><figcaption>A community session</figcaption></figure>
+      <figure class="shot"><img src="helping.jpg" alt="One person leaning over to help another with a laptop" width="568" height="900" loading="lazy"><figcaption>Learning side by side</figcaption></figure>
+      <figure class="shot"><img src="waterfall.jpg" alt="A collage of the community at the Karura waterfall" width="720" height="900" loading="lazy"><figcaption>...and the waterfall</figcaption></figure>
+    </div>
+
+    <a class="btn" href="#mentors">Next: meet my mentors</a>
+  </div>
+</main>
+</div>
+
+<div class="view" id="view-mentors" hidden>
+<header class="page-head band">
+  <div class="wrap">
+    <p class="kicker">Thank you</p>
+    <h1>The people behind it</h1>
+  </div>
+</header>
+<main class="band">
+  <div class="wrap">
+    <section class="thanks">
+      <h2>Thank you</h2>
+      <p>Thank you for this opportunity. I may not be the best candidate for this job, but I learned something. Tech is huge and I still have a long way to go. I am going to try what you taught me and apply it in my work.</p>
+      <ul class="names">
+        <li><img src="sam.jpg" alt="Sam Kyalo, smiling with arms crossed" width="360" height="360"><span class="nm">Sam Kyalo</span><span class="role">Automation and AI Specialist</span></li>
+        <li><img src="peter.jpg" alt="Peter Kibet in a grey suit and blue tie" width="360" height="360"><span class="nm">Peter Kibet</span><span class="role">Claude Community Ambassador, Kenya</span></li>
+        <li><img src="billy.jpg" alt="Billy Mwangi in a dark suit and blue tie" width="360" height="360"><span class="nm">Billy Mwangi</span><span class="role">Claude Community Ambassador, Kenya</span></li>
+      </ul>
+    </section>
+
+    <a class="btn" href="#join">Next: join the community</a>
+  </div>
+</main>
+</div>
+
+<div class="view" id="view-join" hidden>
+<header class="page-head band">
+  <div class="wrap">
+    <p class="kicker">Come along</p>
+    <h1>Join Claude Community Kenya</h1>
+  </div>
+</header>
+<main class="band">
+  <div class="wrap">
+    <section>
+      <p>If you have not joined yet, come and experience what is happening out here. Meet people, learn from them, and find out how you can help each other.</p>
+    </section>
+
+    <figure class="ph" style="--w:460px;--rot:1.2deg"><img src="join-photo.jpg" alt="A smiling woman making a peace sign in front of a painted red wall with trees behind her" width="900" height="1200" loading="lazy"><figcaption>Come and join us</figcaption></figure>
+  </div>
+</main>
+</div>
+
+<footer class="band foot">
+  <div class="bg" aria-hidden="true"><canvas id="particles2"></canvas></div>
+  <div class="wrap"><strong>Dawn Wanjiku</strong><span>Hackhouse Africa attachment · Fluent, Kenya</span></div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button type="button" class="lb-close" aria-label="Close photo">&times;</button>
+  <button type="button" class="lb-prev" aria-label="Previous photo">&#8249;</button>
+  <button type="button" class="lb-next" aria-label="Next photo">&#8250;</button>
+  <figure><img alt="" src=""><figcaption></figcaption></figure>
+</div>
+
+<script>
+/* Interactive particle network behind the hero. Particles drift, link to near neighbours, and gather toward the pointer. */
+function net(hero, canvas) {
+  if (!hero || !canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext("2d");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var w = 0, h = 0, dpr = 1, pts = [];
+  var mouse = { x: -9999, y: -9999, on: false };
+  var LINK = 120, PULL = 170;
+
+  function size() {
+    var r = hero.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = r.width; h = r.height;
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var n = Math.max(30, Math.min(95, Math.round((w * h) / 9000)));
+    pts = [];
+    for (var i = 0; i < n; i++) {
+      pts.push({ x: Math.random() * w, y: Math.random() * h,
+                 vx: (Math.random() - .5) * .5, vy: (Math.random() - .5) * .5,
+                 r: 1.4 + Math.random() * 1.8 });
+    }
+  }
+
+  function step() {
+    ctx.clearRect(0, 0, w, h);
+    var i, j, p, q, dx, dy, d, a;
+    for (i = 0; i < pts.length; i++) {
+      p = pts[i];
+      if (!reduce) {
+        if (mouse.on) {
+          dx = mouse.x - p.x; dy = mouse.y - p.y; d = Math.sqrt(dx * dx + dy * dy);
+          if (d < PULL && d > 1) { p.vx += (dx / d) * .035; p.vy += (dy / d) * .035; }
+        }
+        p.vx *= .985; p.vy *= .985;
+        var sp = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+        if (sp < .12) { p.vx += (Math.random() - .5) * .04; p.vy += (Math.random() - .5) * .04; }
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) { p.vx *= -1; p.x = Math.max(0, Math.min(w, p.x)); }
+        if (p.y < 0 || p.y > h) { p.vy *= -1; p.y = Math.max(0, Math.min(h, p.y)); }
+      }
+    }
+    ctx.lineWidth = 1;
+    for (i = 0; i < pts.length; i++) {
+      p = pts[i];
+      for (j = i + 1; j < pts.length; j++) {
+        q = pts[j]; dx = p.x - q.x; dy = p.y - q.y; d = Math.sqrt(dx * dx + dy * dy);
+        if (d < LINK) {
+          a = (1 - d / LINK) * .5;
+          ctx.strokeStyle = "rgba(125,228,210," + a.toFixed(3) + ")";
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+        }
+      }
+      if (mouse.on) {
+        dx = p.x - mouse.x; dy = p.y - mouse.y; d = Math.sqrt(dx * dx + dy * dy);
+        if (d < PULL) {
+          a = (1 - d / PULL) * .6;
+          ctx.strokeStyle = "rgba(240,178,50," + a.toFixed(3) + ")";
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+        }
+      }
+    }
+    for (i = 0; i < pts.length; i++) {
+      p = pts[i];
+      ctx.fillStyle = "rgba(160,240,226,.85)";
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(step);
+  }
+
+  function move(e) {
+    var r = hero.getBoundingClientRect();
+    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; mouse.on = true;
+  }
+  function leave() { mouse.on = false; }
+
+  hero.addEventListener("pointermove", move);
+  hero.addEventListener("pointerdown", move);
+  hero.addEventListener("pointerleave", leave);
+  hero.addEventListener("pointerup", function (e) { if (e.pointerType !== "mouse") leave(); });
+  if (window.ResizeObserver) { new ResizeObserver(function () { size(); if (reduce) step(); }).observe(hero); }
+  else { window.addEventListener("resize", size); }
+  size(); step();
+}
+net(document.querySelector(".hero"), document.getElementById("particles"));
+net(document.querySelector(".foot"), document.getElementById("particles2"));
+</script>
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var SHARE_URL = "https://claude.ai/artifact/7gnuyg3NjeJeiBkULnGDej";
+
+
+  /* video cover: sound button, pause when off the home page */
+  var cv = document.getElementById("coverVideo"), sb = document.getElementById("soundBtn");
+  function syncSound() { if (!cv || !sb) return; sb.textContent = cv.muted ? "Tap for sound" : "Mute"; sb.setAttribute("aria-pressed", cv.muted ? "false" : "true"); }
+  if (cv && sb) {
+    sb.addEventListener("click", function () {
+      cv.muted = !cv.muted;
+      if (!cv.muted) { try { cv.currentTime = 0; } catch (err) {} }
+      var pr = cv.play(); if (pr && pr.catch) pr.catch(function () {});
+      syncSound();
+    });
+    syncSound();
+  }
+
+  /* pages: each menu item opens its own page */
+  var PAGES = ["home", "story", "photos", "mentors", "join"];
+  var navLinks = [].slice.call(document.querySelectorAll(".nav-links a"));
+  var current = null, io = null;
+  function showPage(name, push) {
+    if (PAGES.indexOf(name) < 0) name = "home";
+    if (name === current) return;
+    current = name;
+    PAGES.forEach(function (p) { document.getElementById("view-" + p).hidden = (p !== name); });
+    navLinks.forEach(function (l) {
+      if (l.getAttribute("href") === "#" + name) l.setAttribute("aria-current", "page"); else l.removeAttribute("aria-current");
+    });
+    if (cv) {
+      if (name === "home") { var pp = cv.play(); if (pp && pp.catch) pp.catch(function () {}); }
+      else { cv.pause(); cv.muted = true; syncSound(); }
+    }
+    window.scrollTo(0, 0);
+    setupFade(document.getElementById("view-" + name));
+    if (push) { try { window.location.hash = name; } catch (err) {} }
+  }
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    e.preventDefault();
+    showPage(a.getAttribute("href").slice(1), true);
+  });
+  window.addEventListener("hashchange", function () { showPage(window.location.hash.slice(1), false); });
+
+  /* share panel */
+  var btn = document.getElementById("shareBtn"), panel = document.getElementById("sharePanel");
+  var input = document.getElementById("shareUrl"), status = document.getElementById("shareStatus");
+  input.value = SHARE_URL;
+  document.getElementById("waLink").href = "https://wa.me/?text=" + encodeURIComponent("Read Dawn Wanjiku's Hackhouse Africa attachment story: " + SHARE_URL);
+  function setPanel(open) { panel.hidden = !open; btn.setAttribute("aria-expanded", open ? "true" : "false"); status.textContent = ""; }
+  btn.addEventListener("click", function () { setPanel(panel.hidden); });
+  document.addEventListener("click", function (e) { if (!panel.hidden && !panel.contains(e.target) && e.target !== btn) setPanel(false); });
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    function manual() { input.focus(); input.select(); status.textContent = "Select the link above and copy it."; }
+    try {
+      navigator.clipboard.writeText(SHARE_URL).then(function () { status.textContent = "Link copied."; }, manual);
+    } catch (err) { manual(); }
+  });
+
+  /* photo viewer */
+  var all = [].slice.call(document.querySelectorAll(".ph img, .shot img")), imgs = all;
+  var lb = document.getElementById("lb"), lbImg = lb.querySelector("img"), lbCap = lb.querySelector("figcaption");
+  var idx = 0, lastFocus = null;
+  function show(i) {
+    idx = (i + imgs.length) % imgs.length;
+    var im = imgs[idx], c = im.parentNode.querySelector("figcaption");
+    lbImg.src = im.currentSrc || im.src; lbImg.alt = im.alt;
+    lbCap.textContent = (c ? c.textContent + "  ·  " : "") + (idx + 1) + " of " + imgs.length;
+  }
+  function openLb(el) { var v = el.closest ? el.closest(".view") : null; if (v) imgs = [].slice.call(v.querySelectorAll(".ph img, .shot img")); lastFocus = document.activeElement; show(imgs.indexOf(el)); lb.hidden = false; document.body.style.overflow = "hidden"; lb.querySelector(".lb-close").focus(); }
+  function closeLb() { lb.hidden = true; document.body.style.overflow = ""; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  all.forEach(function (im) {
+    im.tabIndex = 0; im.setAttribute("role", "button"); im.setAttribute("aria-label", "Enlarge photo: " + im.alt);
+    im.addEventListener("click", function () { openLb(im); });
+    im.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLb(im); } });
+  });
+  lb.querySelector(".lb-close").addEventListener("click", closeLb);
+  lb.querySelector(".lb-prev").addEventListener("click", function () { show(idx - 1); });
+  lb.querySelector(".lb-next").addEventListener("click", function () { show(idx + 1); });
+  lb.addEventListener("click", function (e) { if (e.target === lb || e.target.tagName === "FIGURE") closeLb(); });
+  document.addEventListener("keydown", function (e) {
+    if (!lb.hidden) {
+      if (e.key === "Escape") closeLb();
+      else if (e.key === "ArrowLeft") show(idx - 1);
+      else if (e.key === "ArrowRight") show(idx + 1);
+    } else if (e.key === "Escape" && !panel.hidden) { setPanel(false); btn.focus(); }
+  });
+
+  /* gentle fade-in for what is below the first screen of each page */
+  function setupFade(view) {
+    if (io) { io.disconnect(); io = null; }
+    var els = [].slice.call(view.querySelectorAll("main .wrap > section, main .wrap > blockquote, main .wrap > .ph, .tile, .shot"));
+    els.forEach(function (el) { el.classList.remove("pre"); });
+    if (reduce || !("IntersectionObserver" in window)) return;
+    var vh = window.innerHeight || 800;
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.remove("pre"); io.unobserve(en.target); } });
+    }, { threshold: 0.1, rootMargin: "0px 0px -5% 0px" });
+    els.forEach(function (el) {
+      if (el.getBoundingClientRect().top > vh * 0.9) { el.classList.add("pre"); io.observe(el); }
+    });
+  }
+
+  showPage(window.location.hash.slice(1), false);
+})();
+</script>
+
+</body></html>
