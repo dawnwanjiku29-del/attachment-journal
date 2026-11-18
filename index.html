@@ -186,10 +186,15 @@ main .wrap > .btn { align-self: flex-start; }
 .lessons strong { font-family: var(--font-display); font-size: 1.1rem; line-height: 1.2; }
 .lessons span { color: var(--muted); font-size: 16px; line-height: 1.45; }
 
-/* photo with a quote beside it */
-section.photo-quote { flex-direction: column; align-items: center; gap: 28px; }
-section.photo-quote blockquote { max-width: 34ch; font-size: 1.35rem; }
-@media (min-width: 700px) { section.photo-quote { flex-direction: row; align-items: center; gap: 48px; } }
+/* quote on the left, photo on the right */
+section.photo-quote { flex-direction: column; align-items: stretch; gap: 28px; }
+section.photo-quote blockquote { max-width: 28ch; font-size: 1.5rem; line-height: 1.35; font-weight: 500; padding: 4px 0 4px 24px; border-left: 4px solid var(--accent); text-wrap: balance; }
+section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
+@media (min-width: 700px) {
+  section.photo-quote { flex-direction: row; align-items: center; justify-content: space-between; gap: 40px; }
+  section.photo-quote blockquote { flex: 1 1 0; min-width: 0; font-size: 1.7rem; }
+  section.photo-quote .ph { flex: none; align-self: center; margin-right: 0; }
+}
 </style>
 
 <nav class="nav band" aria-label="Page menu">
@@ -329,8 +334,8 @@ section.photo-quote blockquote { max-width: 34ch; font-size: 1.35rem; }
     </section>
 
 <section class="photo-quote">
-          <figure class="ph" style="--w:290px;--rot:-2.2deg"><img src="impact-lab.jpg" alt="Two speakers presenting at an Absa training beside a large wall screen" width="551" height="900" loading="lazy"><figcaption>Absa training with Fluent</figcaption></figure>
       <blockquote>It is not just about writing the logbook and the supervisor coming. It is about acquiring the skills required, and gaining the experience for the sake of my future and for myself.</blockquote>
+      <figure class="ph" style="--w:290px;--rot:2.2deg"><img src="impact-lab.jpg" alt="Two speakers presenting at an Absa training beside a large wall screen" width="551" height="900" loading="lazy"><figcaption>Absa training with Fluent</figcaption></figure>
     </section>
 
     <a class="btn" href="#photos">Next: see the photos</a>
