@@ -47,7 +47,7 @@ a { color: inherit; }
 .bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .bg canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .kicker { font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0; }
-.hero h1 { font-size: clamp(2.3rem, 7vw, 3.8rem); font-weight: 700; letter-spacing: -.02em; }
+.hero h1 { font-size: clamp(1.15rem, 3.4vw, 1.75rem); font-weight: 700; letter-spacing: -.02em; }
 .hero p.lede { margin: 0; font-size: 1.15rem; max-width: 56ch; opacity: .92; }
 .byline { font-size: 15px; opacity: .8; margin: 0; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
@@ -201,11 +201,12 @@ section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
 .can-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .can-list li { padding: 12px 16px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); line-height: 1.45; }
 .can-list strong { font-family: var(--font-display); }
+.hero .kicker { font-size: clamp(1.3rem, 4vw, 2rem); letter-spacing: .1em; font-weight: 700; line-height: 1.25; }
 </style>
 
 <nav class="nav band" aria-label="Page menu">
   <div class="nav-in">
-    <a class="nav-brand" href="#home">Dawn Wanjiku</a>
+    <a class="nav-brand" href="#home">DAWN KAMAU</a>
     <div class="nav-links">
       <a class="nav-home" href="#home">Home</a>
       <a href="#story">Story</a>
@@ -234,7 +235,7 @@ section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
     <p class="kicker">Attachment story · Hackhouse Africa</p>
     <h1>I thought attachment would just go by. It didn't.</h1>
     <p class="lede">Three months at Fluent, alongside Claude Community Kenya, taught me more about people, growth and myself than I expected.</p>
-    <p class="byline">By Dawn Wanjiku · Diploma in ICT, Daystar University</p>
+    <p class="byline">By DAWN KAMAU · Diploma in ICT, Daystar University</p>
     <div class="actions">
       <a class="btn" href="#story">Read my story</a>
     </div>
@@ -252,7 +253,7 @@ section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
   <div class="wrap">
     <section>
       <h2>In my own words</h2>
-      <p>My name is Dawn Wanjiku. I have been at Hackhouse for about two and a half to three months now. What I have learned since I came has been very broad, and it has expanded how I think about things. What I have been trained in is AI.</p>
+      <p>My name is DAWN KAMAU. I have been at Hackhouse for about two and a half to three months now. What I have learned since I came has been very broad, and it has expanded how I think about things. What I have been trained in is AI.</p>
       <p>I work with Fluent at Hackhouse, alongside Claude Community Kenya. Billy, Peter and Sam have taught me a lot.</p>
     </section>
 
@@ -428,7 +429,7 @@ section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
 
 <footer class="band foot">
   <div class="bg" aria-hidden="true"><canvas id="particles2"></canvas></div>
-  <div class="wrap"><strong>Dawn Wanjiku</strong><span>Hackhouse Africa attachment · Fluent, Kenya</span></div>
+  <div class="wrap"><strong>DAWN KAMAU</strong><span>Hackhouse Africa attachment · Fluent, Kenya</span></div>
 </footer>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
@@ -577,7 +578,7 @@ net(document.querySelector(".foot"), document.getElementById("particles2"));
   var btn = document.getElementById("shareBtn"), panel = document.getElementById("sharePanel");
   var input = document.getElementById("shareUrl"), status = document.getElementById("shareStatus");
   input.value = SHARE_URL;
-  document.getElementById("waLink").href = "https://wa.me/?text=" + encodeURIComponent("Read Dawn Wanjiku's Hackhouse Africa attachment story: " + SHARE_URL);
+  document.getElementById("waLink").href = "https://wa.me/?text=" + encodeURIComponent("Read Dawn Kamau's Hackhouse Africa attachment story: " + SHARE_URL);
   function setPanel(open) { panel.hidden = !open; btn.setAttribute("aria-expanded", open ? "true" : "false"); status.textContent = ""; }
   btn.addEventListener("click", function () { setPanel(panel.hidden); });
   document.addEventListener("click", function (e) { if (!panel.hidden && !panel.contains(e.target) && e.target !== btn) setPanel(false); });
