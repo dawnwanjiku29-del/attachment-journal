@@ -111,15 +111,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .nav-links { display: flex; align-items: center; gap: 4px; margin-left: auto; }
 .nav-links a { text-decoration: none; font-size: 15px; font-weight: 600; padding: 8px 10px; border-radius: 8px; opacity: .88; }
 .nav-links a:hover { opacity: 1; background: rgba(243, 246, 244, .12); }
-.share-btn { font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; border: 0; border-radius: 8px; padding: 8px 14px; margin-left: 6px; background: var(--accent); color: var(--accent-fg); }
-.share-btn:hover { filter: brightness(1.06); }
-.share-panel { position: absolute; top: calc(100% + 8px); right: max(16px, env(safe-area-inset-right, 0px)); width: min(360px, calc(100% - 32px)); background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 12px; padding: 16px; box-shadow: 0 16px 40px rgba(0, 0, 0, .28); display: flex; flex-direction: column; gap: 10px; }
-.share-panel p { margin: 0; font-weight: 600; font-size: 16px; }
-.share-row { display: flex; gap: 8px; flex-wrap: wrap; }
-.share-row input { flex: 1 1 160px; min-width: 0; font: inherit; font-size: 14px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); }
-.share-row button, .share-row a { font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; border: 0; border-radius: 8px; padding: 9px 14px; background: var(--brand); color: var(--brand-fg); }
-.share-row a.wa { background: var(--accent); color: var(--accent-fg); flex: 1 1 100%; }
-.share-status { font-size: 14px; color: var(--muted); min-height: 1.3em; }
 @media (max-width: 520px) { .nav-brand { display: none; } .nav-links { margin-left: 0; width: 100%; justify-content: space-between; } }
 [id] { scroll-margin-top: 76px; }
 
@@ -143,7 +134,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .view { min-height: 62vh; }
 .nav-home { display: none; }
 .nav-links a[aria-current="page"] { opacity: 1; background: rgba(243, 246, 244, .16); }
-@media (max-width: 520px) { .nav-home { display: inline-block; } .nav-links a { padding: 8px 7px; font-size: 14px; } .share-btn { padding: 8px 11px; font-size: 14px; margin-left: 2px; } }
+@media (max-width: 520px) { .nav-home { display: inline-block; } .nav-links a { padding: 8px 7px; font-size: 14px; } }
 .page-head { background: var(--brand); color: var(--brand-fg); padding-block: 48px 40px; }
 .page-head .wrap { display: flex; flex-direction: column; gap: 12px; }
 .page-head h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; letter-spacing: -.02em; }
@@ -168,8 +159,7 @@ main .wrap > .btn { align-self: flex-start; }
   .nav-links { width: auto; flex: 1 1 auto; min-width: 0; margin-left: 0; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
   .nav-links::-webkit-scrollbar { display: none; }
   .nav-links a { white-space: nowrap; }
-  .share-btn { flex: none; }
-}
+  }
 
 /* video cover */
 .hero .wrap.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; max-width: 960px; align-items: center; }
@@ -260,18 +250,8 @@ section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
       <a href="#mentors">Mentors</a>
       <a href="#join">Join</a>
     </div>
-    <button type="button" class="share-btn" id="shareBtn" aria-expanded="false" aria-controls="sharePanel">Share</button>
   </div>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
-  <div class="share-panel" id="sharePanel" hidden>
-    <p>Share this page</p>
-    <div class="share-row">
-      <input id="shareUrl" type="text" readonly aria-label="Page link">
-      <button type="button" id="copyBtn">Copy link</button>
-      <a class="wa" id="waLink" href="https://wa.me/" target="_blank" rel="noopener">Share on WhatsApp</a>
-    </div>
-    <span class="share-status" id="shareStatus" role="status" aria-live="polite"></span>
-  </div>
 </nav>
 
 <div class="view" id="view-home">
@@ -577,7 +557,6 @@ net(document.querySelector(".foot"), document.getElementById("particles2"));
 <script>
 (function () {
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var SHARE_URL = "https://claude.ai/artifact/7gnuyg3NjeJeiBkULnGDej";
 
 
   /* video cover: sound button, pause when off the home page */
@@ -635,21 +614,6 @@ net(document.querySelector(".foot"), document.getElementById("particles2"));
   });
   window.addEventListener("hashchange", function () { showPage(window.location.hash.slice(1), false); });
 
-  /* share panel */
-  var btn = document.getElementById("shareBtn"), panel = document.getElementById("sharePanel");
-  var input = document.getElementById("shareUrl"), status = document.getElementById("shareStatus");
-  input.value = SHARE_URL;
-  document.getElementById("waLink").href = "https://wa.me/?text=" + encodeURIComponent("Read Dawn Kamau's Hackhouse Africa attachment story: " + SHARE_URL);
-  function setPanel(open) { panel.hidden = !open; btn.setAttribute("aria-expanded", open ? "true" : "false"); status.textContent = ""; }
-  btn.addEventListener("click", function () { setPanel(panel.hidden); });
-  document.addEventListener("click", function (e) { if (!panel.hidden && !panel.contains(e.target) && e.target !== btn) setPanel(false); });
-  document.getElementById("copyBtn").addEventListener("click", function () {
-    function manual() { input.focus(); input.select(); status.textContent = "Select the link above and copy it."; }
-    try {
-      navigator.clipboard.writeText(SHARE_URL).then(function () { status.textContent = "Link copied."; }, manual);
-    } catch (err) { manual(); }
-  });
-
   /* photo viewer */
   var all = [].slice.call(document.querySelectorAll(".ph img, .shot img")), imgs = all;
   var lb = document.getElementById("lb"), lbImg = lb.querySelector("img"), lbCap = lb.querySelector("figcaption");
@@ -676,7 +640,7 @@ net(document.querySelector(".foot"), document.getElementById("particles2"));
       if (e.key === "Escape") closeLb();
       else if (e.key === "ArrowLeft") show(idx - 1);
       else if (e.key === "ArrowRight") show(idx + 1);
-    } else if (e.key === "Escape" && !panel.hidden) { setPanel(false); btn.focus(); }
+    }
   });
 
   /* gentle fade-in for what is below the first screen of each page */
