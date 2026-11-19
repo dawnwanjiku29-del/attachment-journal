@@ -202,6 +202,52 @@ section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
 .can-list li { padding: 12px 16px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); line-height: 1.45; }
 .can-list strong { font-family: var(--font-display); }
 .hero .kicker { font-size: clamp(1.3rem, 4vw, 2rem); letter-spacing: .1em; font-weight: 700; line-height: 1.25; }
+
+/* ===== extras: progress line, hover, lesson animation, photo pins, drop caps, timeline ===== */
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; pointer-events: none; }
+.progress span { display: block; width: 100%; height: 100%; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+
+/* photo pins */
+.ph { position: relative; }
+.ph::before { content: ""; position: absolute; top: -13px; left: 50%; width: 86px; height: 24px; margin-left: -43px; transform: rotate(-4deg); pointer-events: none; z-index: 1;
+  background: linear-gradient(90deg, rgba(255, 255, 255, .28), rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, .22) 70%, rgba(255, 255, 255, 0)), rgba(228, 205, 146, .86);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .18); }
+.ph.l::before, .photo-quote .ph::before { transform: rotate(3deg); }
+
+/* opening letters */
+#view-story main .wrap > section:first-child > p:first-of-type::first-letter,
+#view-home main .wrap > section:first-child > p:first-of-type::first-letter { float: left; font-family: var(--font-display); font-weight: 700; font-size: 3.7em; line-height: .8; padding: 8px 12px 0 0; color: var(--brand); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) #view-story main .wrap > section:first-child > p:first-of-type::first-letter,
+  :root:not([data-theme="light"]) #view-home main .wrap > section:first-child > p:first-of-type::first-letter { color: var(--accent); }
+}
+:root[data-theme="dark"] #view-story main .wrap > section:first-child > p:first-of-type::first-letter,
+:root[data-theme="dark"] #view-home main .wrap > section:first-child > p:first-of-type::first-letter { color: var(--accent); }
+
+/* timeline on the story page: a gold line in the left gutter, one dot per chapter */
+#view-story main .wrap { position: relative; }
+#view-story main .wrap::before { content: ""; position: absolute; left: -11px; top: 0; bottom: 0; width: 2px; pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--accent) 48px, var(--accent) calc(100% - 140px), transparent); }
+#view-story main .wrap > section { position: relative; }
+#view-story main .wrap > section:has(> h2)::before { content: ""; position: absolute; left: -16px; top: 9px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--bg); z-index: 3; }
+
+/* lesson cards: appear one after another */
+.lessons li { transition: opacity .6s ease, translate .6s ease, transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.lessons.stag li { opacity: 0; translate: 0 16px; }
+.lessons.stag.in li { opacity: 1; translate: 0 0; transition-delay: calc(var(--i, 0) * 90ms), calc(var(--i, 0) * 90ms), 0s, 0s, 0s; }
+
+/* hover effects */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  main .wrap .ph { transition: opacity .8s ease, translate .8s ease, transform .3s ease, box-shadow .3s ease; }
+  .gallery .shot { transition: opacity .8s ease, translate .8s ease, transform .25s ease, box-shadow .25s ease; }
+  .wrap-wide .tile { transition: opacity .8s ease, translate .8s ease, transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .names li { transition: transform .2s ease, box-shadow .2s ease; }
+  main .wrap .ph:hover { transform: rotate(0deg) scale(1.04); box-shadow: 0 18px 38px rgba(0, 0, 0, .26); z-index: 2; }
+  .gallery .shot:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 14px 30px rgba(0, 0, 0, .2); }
+  .wrap-wide .tile:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(0, 0, 0, .16); }
+  .lessons li:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(0, 0, 0, .14); border-color: var(--accent); }
+  .names li:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(0, 0, 0, .18); }
+}
 </style>
 
 <nav class="nav band" aria-label="Page menu">
@@ -216,6 +262,7 @@ section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
     </div>
     <button type="button" class="share-btn" id="shareBtn" aria-expanded="false" aria-controls="sharePanel">Share</button>
   </div>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
   <div class="share-panel" id="sharePanel" hidden>
     <p>Share this page</p>
     <div class="share-row">
@@ -260,13 +307,13 @@ section.photo-quote .ph { align-self: flex-end; margin-right: 4px; }
     <section>
       <h2>What I learned</h2>
       <ul class="lessons">
-        <li><strong>What an AI agent is</strong><span>A model that has been given a set of instructions and tools to carry them out.</span></li>
-        <li><strong>Progressive disclosure</strong><span>Knowing only what is necessary, when it is needed.</span></li>
+        <li><strong>What an agent is</strong><span>A model that has been given a set of instructions and tools to execute them.</span></li>
+        <li><strong>Progressive disclosure</strong><span>We only need to know what is necessary.</span></li>
         <li><strong>Prompts</strong><span>What a prompt is.</span></li>
         <li><strong>Skills</strong><span>What skills are.</span></li>
         <li><strong>Using Claude</strong><span>How to use Claude and its features.</span></li>
         <li><strong>Using AI safely</strong><span>How to use AI safely in my work.</span></li>
-        <li><strong>The right context</strong><span>Giving it the right context so it gives the right output.</span></li>
+        <li><strong>The context window</strong><span>The amount of space that Claude can hold in its memory.</span></li>
       </ul>
     </section>
 
@@ -546,10 +593,23 @@ net(document.querySelector(".foot"), document.getElementById("particles2"));
     syncSound();
   }
 
+  /* progress line under the menu */
+  var bar = document.getElementById("progressBar"), ticking = false;
+  function updateProgress() {
+    ticking = false;
+    if (!bar) return;
+    var de = document.documentElement, max = de.scrollHeight - (window.innerHeight || de.clientHeight);
+    var r = max > 0 ? Math.min(1, Math.max(0, (window.pageYOffset || de.scrollTop || 0) / max)) : 0;
+    bar.style.transform = "scaleX(" + r.toFixed(4) + ")";
+  }
+  function queueProgress() { if (!ticking) { ticking = true; requestAnimationFrame(updateProgress); } }
+  window.addEventListener("scroll", queueProgress, { passive: true });
+  window.addEventListener("resize", queueProgress);
+
   /* pages: each menu item opens its own page */
   var PAGES = ["home", "story", "photos", "mentors", "join"];
   var navLinks = [].slice.call(document.querySelectorAll(".nav-links a"));
-  var current = null, io = null;
+  var current = null, io = null, io2 = null;
   function showPage(name, push) {
     if (PAGES.indexOf(name) < 0) name = "home";
     if (name === current) return;
@@ -563,6 +623,7 @@ net(document.querySelector(".foot"), document.getElementById("particles2"));
       else { cv.pause(); cv.muted = true; syncSound(); }
     }
     window.scrollTo(0, 0);
+    updateProgress();
     setupFade(document.getElementById("view-" + name));
     if (push) { try { window.location.hash = name; } catch (err) {} }
   }
@@ -621,9 +682,19 @@ net(document.querySelector(".foot"), document.getElementById("particles2"));
   /* gentle fade-in for what is below the first screen of each page */
   function setupFade(view) {
     if (io) { io.disconnect(); io = null; }
+    if (io2) { io2.disconnect(); io2 = null; }
     var els = [].slice.call(view.querySelectorAll("main .wrap > section, main .wrap > blockquote, main .wrap > .ph, .tile, .shot"));
     els.forEach(function (el) { el.classList.remove("pre"); });
+    var lists = [].slice.call(view.querySelectorAll(".lessons"));
+    lists.forEach(function (ul) { ul.classList.remove("stag", "in"); });
     if (reduce || !("IntersectionObserver" in window)) return;
+    io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io2.unobserve(en.target); } });
+    }, { threshold: 0.15 });
+    lists.forEach(function (ul) {
+      [].slice.call(ul.children).forEach(function (li, i) { li.style.setProperty("--i", i); });
+      ul.classList.add("stag"); io2.observe(ul);
+    });
     var vh = window.innerHeight || 800;
     io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.remove("pre"); io.unobserve(en.target); } });
